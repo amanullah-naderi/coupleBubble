@@ -1,0 +1,121 @@
+
+import com.google.gms.googleservices.GoogleServicesPlugin.MissingGoogleServicesStrategy
+
+plugins {
+  alias(libs.plugins.android.application)
+  alias(libs.plugins.kotlin.compose)
+  alias(libs.plugins.google.services)
+}
+
+android {
+  namespace = "com.aistudio.couplebubble.qxztrw"
+  compileSdk { version = release(36) { minorApiLevel = 1 } }
+
+  defaultConfig {
+    applicationId = "com.aistudio.couplebubble.qxztrw"
+    minSdk = 26
+    targetSdk = 36
+    versionCode = 9
+    versionName = "1.4.3"
+
+    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+  }
+
+  signingConfigs {
+    create("release") {
+      val keystorePath = System.getenv("KEYSTORE_PATH") ?: "${rootDir}/my-upload-key.jks"
+      storeFile = file(keystorePath)
+      storePassword = System.getenv("STORE_PASSWORD")
+      keyAlias = "upload"
+      keyPassword = System.getenv("KEY_PASSWORD")
+    }
+    create("debugConfig") {
+      storeFile = file("${rootDir}/debug.keystore")
+      storePassword = "android"
+      keyAlias = "androiddebugkey"
+      keyPassword = "android"
+    }
+  }
+
+  buildTypes {
+    release {
+      buildConfigField("boolean", "DEMO_MODE", "false")
+      isCrunchPngs = false
+      isMinifyEnabled = true
+      isShrinkResources = true
+      proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+      signingConfig = signingConfigs.getByName("release")
+    }
+    debug {
+      // Without google-services.json (a fresh clone) or with -Pdemo=true, debug builds run on local sample data
+      val demoMode = providers.gradleProperty("demo").orNull?.toBoolean() ?: !file("google-services.json").exists()
+      buildConfigField("boolean", "DEMO_MODE", demoMode.toString())
+      if (file("${rootDir}/debug.keystore").exists()) {
+        signingConfig = signingConfigs.getByName("debugConfig")
+      }
+    }
+  }
+  compileOptions {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+  }
+  buildFeatures {
+    compose = true
+    buildConfig = true
+  }
+  testOptions { unitTests { isIncludeAndroidResources = true; isReturnDefaultValues = true } }
+  dependenciesInfo {
+    includeInApk = false
+    includeInBundle = true
+  }
+}
+
+googleServices { missingGoogleServicesStrategy = MissingGoogleServicesStrategy.WARN }
+
+composeCompiler {
+  // Lets Compose skip recomposition for the immutable domain models and the lists in UI state
+  stabilityConfigurationFiles.add(layout.projectDirectory.file("compose_stability.conf"))
+}
+
+dependencies {
+  implementation(platform(libs.androidx.compose.bom))
+  implementation(platform(libs.firebase.bom))
+  implementation(libs.androidx.activity.compose)
+  implementation(libs.androidx.compose.material.icons.core)
+  implementation(libs.androidx.compose.material.icons.extended)
+  implementation(libs.androidx.compose.material3)
+  implementation(libs.androidx.compose.ui)
+  implementation(libs.androidx.compose.ui.graphics)
+  implementation(libs.androidx.compose.ui.tooling.preview)
+  implementation(libs.androidx.core.ktx)
+  implementation(libs.androidx.core.splashscreen)
+  implementation(libs.androidx.datastore.preferences)
+  implementation(libs.androidx.glance.appwidget)
+  implementation(libs.androidx.glance.material3)
+  implementation(libs.androidx.lifecycle.runtime.compose)
+  implementation(libs.androidx.lifecycle.runtime.ktx)
+  implementation(libs.androidx.lifecycle.viewmodel.compose)
+  implementation(libs.coil.compose)
+  implementation(libs.firebase.firestore)
+  implementation(libs.firebase.auth)
+  implementation(libs.firebase.storage)
+  implementation(libs.androidx.credentials)
+  implementation(libs.androidx.credentials.play.services)
+  implementation(libs.googleid)
+  implementation(libs.play.services.location)
+  implementation(libs.kotlinx.coroutines.android)
+  implementation(libs.kotlinx.coroutines.core)
+  testImplementation(libs.androidx.compose.ui.test.junit4)
+  testImplementation(libs.androidx.core)
+  testImplementation(libs.androidx.junit)
+  testImplementation(libs.junit)
+  testImplementation(libs.kotlinx.coroutines.test)
+  testImplementation(libs.robolectric)
+  androidTestImplementation(platform(libs.androidx.compose.bom))
+  androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+  androidTestImplementation(libs.androidx.espresso.core)
+  androidTestImplementation(libs.androidx.junit)
+  androidTestImplementation(libs.androidx.runner)
+  debugImplementation(libs.androidx.compose.ui.test.manifest)
+  debugImplementation(libs.androidx.compose.ui.tooling)
+}

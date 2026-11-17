@@ -1,0 +1,165 @@
+package com.aistudio.couplebubble.qxztrw.ui.screens.home
+
+import android.net.Uri
+import androidx.compose.runtime.Immutable
+import com.aistudio.couplebubble.qxztrw.core.ui.UiText
+import com.aistudio.couplebubble.qxztrw.domain.model.CounterPreferences
+import com.aistudio.couplebubble.qxztrw.domain.model.CoupleSpace
+import com.aistudio.couplebubble.qxztrw.domain.model.CustomMilestone
+import com.aistudio.couplebubble.qxztrw.domain.model.GestureHint
+import com.aistudio.couplebubble.qxztrw.domain.model.Memory
+import com.aistudio.couplebubble.qxztrw.domain.model.PairingCodes
+import com.aistudio.couplebubble.qxztrw.domain.model.PartnerRole
+import com.aistudio.couplebubble.qxztrw.domain.model.RelationshipMetrics
+import com.aistudio.couplebubble.qxztrw.domain.model.Reunion
+import com.aistudio.couplebubble.qxztrw.domain.model.ReunionPlace
+import com.aistudio.couplebubble.qxztrw.domain.model.ReunionPlaceSource
+import com.aistudio.couplebubble.qxztrw.domain.model.ReunionStatus
+import com.aistudio.couplebubble.qxztrw.domain.model.SpaceDefaults
+import com.aistudio.couplebubble.qxztrw.domain.model.UserProfile
+
+/** Upload progress of one memory photo; absent from the map once nothing needs to be shown. */
+enum class PhotoSyncState {
+    UPLOADING,
+    SYNCED
+}
+
+data class PhotoSlotKey(val memoryId: String, val isPartner1: Boolean)
+
+/** Tabs of the bottom navigation once a couple is paired. */
+enum class MainTab {
+    US,
+    NOTES
+}
+
+enum class PairingTab {
+    CREATE,
+    ENTER
+}
+
+/** Google sign-in progress, shared by the pairing screen and the dashboard's backup dialog. */
+@Immutable
+data class GoogleAuthState(
+    val isLoading: Boolean = false,
+    val error: UiText? = null
+)
+
+@Immutable
+data class PairingUiState(
+    val selectedTab: PairingTab = PairingTab.CREATE,
+    /** Empty until the ViewModel has generated this device's own random code. */
+    val generatedCode: String = "",
+    val countdownSeconds: Int = 0,
+    val enteredCode: String = "",
+    val isLoading: Boolean = false,
+    val errorMessage: UiText? = null,
+    val isCopied: Boolean = false,
+    val userProfile: UserProfile? = null,
+    val showSpaceFullDialog: Boolean = false,
+    val googleAuth: GoogleAuthState = GoogleAuthState()
+) {
+    val isInputReady: Boolean
+        get() = PairingCodes.normalize(enteredCode).length == 6
+}
+
+/** The one dialog of the paired home that is open; a sealed type, so two dialogs can never be open at once. */
+sealed interface DashboardDialog {
+    data object None : DashboardDialog
+    data object Disconnect : DashboardDialog
+    data object EditNames : DashboardDialog
+    data class AddMemory(val initialPhotoUri: Uri? = null) : DashboardDialog
+    data class EditMemory(val memory: Memory) : DashboardDialog
+    data object GoogleBackup : DashboardDialog
+
+    /**
+     * The milestone settings, with the "add custom milestone" dialog on top while [addingCustom]
+     * or the delete confirmation for [deletingCustom].
+     */
+    data class MilestoneSettings(
+        val addingCustom: Boolean = false,
+        val deletingCustom: CustomMilestone? = null
+    ) : DashboardDialog
+
+    /** Planning or editing the reunion countdown. */
+    data object Reunion : DashboardDialog
+}
+
+/** Which tab, menu and dialog of the paired home are open, and which long-running actions are busy. */
+@Immutable
+data class DashboardDialogState(
+    val selectedTab: MainTab = MainTab.US,
+    val isMenuExpanded: Boolean = false,
+    val dialog: DashboardDialog = DashboardDialog.None,
+    val isSavingSpaceSetup: Boolean = false,
+    val isUploadingProfilePhoto: Boolean = false,
+    val isSwappingRoles: Boolean = false,
+    /** Counts confirmed role swaps, so an open names dialog swaps its fields only after the server agreed. */
+    val completedRoleSwaps: Int = 0,
+    val isSavingToGallery: Boolean = false
+)
+
+@Immutable
+data class DashboardUiState(
+    val space: CoupleSpace,
+    val metrics: RelationshipMetrics,
+    val memories: List<Memory> = emptyList(),
+    val filteredMemories: List<Memory> = memories,
+    val searchQuery: String = "",
+    val isSearchOpen: Boolean = false,
+    val userProfile: UserProfile? = null,
+    val isCurrentUserPartner1: Boolean = true,
+    /** Slot whose profile photo this user may change; `null` while their UID is not bound to the space. */
+    val currentUserRole: PartnerRole? = PartnerRole.PARTNER_1,
+    val dialogs: DashboardDialogState = DashboardDialogState(),
+    val googleAuth: GoogleAuthState = GoogleAuthState(),
+    val photoSyncStates: Map<PhotoSlotKey, PhotoSyncState> = emptyMap(),
+    val counterPreferences: CounterPreferences = CounterPreferences(),
+    val customMilestones: List<CustomMilestone> = emptyList(),
+    /** The planned reunion as seen by this user; `null` while nothing is planned or it is over. */
+    val reunion: ReunionUiState? = null,
+    val dismissedGestureHints: Set<GestureHint> = emptySet(),
+    val highlightedMemoryId: String? = null
+) {
+    /** A fresh space still carries placeholder names and date; both partners are asked until one of them saves. */
+    val needsSpaceSetup: Boolean
+        get() = !space.isSetupComplete
+
+    /** The current user's own name for the setup form: the stored one, else the first name of the Google account. */
+    val setupOwnName: String
+        get() {
+            val stored = if (isCurrentUserPartner1) space.partner1Name else space.partner2Name
+            val placeholder = if (isCurrentUserPartner1) SpaceDefaults.PARTNER_1_NAME else SpaceDefaults.PARTNER_2_NAME
+            return if (stored != placeholder) stored
+            else userProfile?.displayName?.trim()?.substringBefore(' ').orEmpty()
+        }
+
+    /** The partner's name for the setup form; placeholders are left empty instead of suggesting "Alex"/"Sam". */
+    val setupPartnerName: String
+        get() {
+            val stored = if (isCurrentUserPartner1) space.partner2Name else space.partner1Name
+            val placeholder = if (isCurrentUserPartner1) SpaceDefaults.PARTNER_2_NAME else SpaceDefaults.PARTNER_1_NAME
+            return if (stored != placeholder) stored else ""
+        }
+}
+
+/** The reunion countdown from the current user's side: own and partner place are resolved by UID. */
+@Immutable
+data class ReunionUiState(
+    val reunion: Reunion,
+    val status: ReunionStatus,
+    val distanceKm: Int?,
+    val ownPlace: ReunionPlace?,
+    val partnerPlace: ReunionPlace?,
+    val ownSource: ReunionPlaceSource,
+    val partnerSource: ReunionPlaceSource,
+    /** The time the sources were judged at, for "vor 2 Std." labels. */
+    val nowMillis: Long
+)
+
+/** Which screen the app shows: a spinner while the session is restored, onboarding, pairing, or the paired home. */
+enum class AppRoute {
+    LOADING,
+    ONBOARDING,
+    UNPAIRED,
+    PAIRED
+}

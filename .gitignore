@@ -1,0 +1,38 @@
+*.iml
+.gradle
+.kotlin
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+.env
+debug.keystore
+*.keystore
+*.jks
+google-services.json
+**/google-services.json
+*.aab
+*.apk
+/app/release/
+.agents
+skills-lock.json
+# Lokale Batch-Automatisierung
+features.txt
+features_*.txt
+*.tmp
+# Logs von run_features.ps1
+logs/
+# AI Studio artifacts and IDE state
+.aistudio/
+/.idea/deviceManager.xml
+# Android Studio App Quality Insights (names the Firebase project)
+/.idea/appInsightsSettings.xml

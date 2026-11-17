@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 6-11: keep the session (space ID, role) and the Firebase login so a reinstall finds the space again.
+     Local photo copies are left out: they are restored from Firestore/Storage and would blow the 25 MB quota. -->
+<full-backup-content>
+    <include domain="file" path="datastore/couple_session_preferences.preferences_pb" />
+    <include domain="sharedpref" path="." />
+</full-backup-content>

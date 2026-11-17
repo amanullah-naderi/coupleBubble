@@ -1,0 +1,425 @@
+package com.aistudio.couplebubble.qxztrw.ui.screens.notes
+
+import android.content.Context
+import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.semantics.SemanticsActions
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.assert
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsNotSelected
+import androidx.compose.ui.test.assertIsSelected
+import androidx.activity.ComponentActivity
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performTextInput
+import androidx.test.core.app.ApplicationProvider
+import com.aistudio.couplebubble.qxztrw.R
+import com.aistudio.couplebubble.qxztrw.domain.model.DefaultNoteLabelIds
+import com.aistudio.couplebubble.qxztrw.domain.model.NoteItem
+import com.aistudio.couplebubble.qxztrw.domain.model.NoteLabel
+import com.aistudio.couplebubble.qxztrw.domain.model.NoteType
+import com.aistudio.couplebubble.qxztrw.domain.model.SharedNote
+import com.aistudio.couplebubble.qxztrw.ui.theme.CoupleBubbleTheme
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
+
+@RunWith(RobolectricTestRunner::class)
+@Config(qualifiers = "w411dp-h891dp")
+class NotesScreenTest {
+
+    @get:Rule
+    val composeRule = createAndroidComposeRule<ComponentActivity>()
+
+    private val context: Context = ApplicationProvider.getApplicationContext()
+    private val events = mutableListOf<NotesEvent>()
+
+    private val labels = listOf(
+        NoteLabel(DefaultNoteLabelIds.SHOPPING, "Supermarkt", 1),
+        NoteLabel(DefaultNoteLabelIds.IDEAS, "Ideen", 2),
+        NoteLabel("travel", "Lissabon 2027", 3)
+    )
+
+    private val shoppingList = SharedNote(
+        id = "shopping",
+        title = "Wocheneinkauf",
+        type = NoteType.CHECKLIST,
+        labelId = DefaultNoteLabelIds.SHOPPING,
+        pinned = true,
+        createdBy = "uid_alex",
+        items = listOf(
+            NoteItem("i1", "Hafermilch", checked = true, position = 1),
+            NoteItem("i2", "Feta", position = 2),
+            NoteItem("i3", "Basilikum", position = 3),
+            NoteItem("i4", "Blumen", position = 4)
+        )
+    )
+    private val ideaNote = SharedNote(id = "idea", title = "Geschenkideen", body = "Fotobuch von Lissabon")
+
+    private fun setContent(state: NotesUiState) {
+        composeRule.setContent {
+            CoupleBubbleTheme(darkTheme = false) {
+                NotesScreen(state = state, onEvent = { events += it })
+            }
+        }
+    }
+
+    @Test
+    fun emptyStateOffersToCreateTheFirstNote() {
+        setContent(NotesUiState())
+
+        composeRule.onNodeWithTag("empty_notes_card").assertIsDisplayed()
+        composeRule.onNodeWithTag("add_first_note_button").performClick()
+
+        assertEquals(listOf<NotesEvent>(NotesEvent.CreateNote), events)
+    }
+
+    @Test
+    fun fabCreatesANote() {
+        setContent(NotesUiState(notes = listOf(ideaNote), hasAnyNotes = true))
+
+        composeRule.onNodeWithTag("notes_fab").performClick()
+
+        assertEquals(listOf<NotesEvent>(NotesEvent.CreateNote), events)
+    }
+
+    @Test
+    fun checklistFabCreatesAChecklist() {
+        setContent(NotesUiState(notes = listOf(ideaNote), hasAnyNotes = true))
+
+        composeRule.onNodeWithTag("notes_checklist_fab").performClick()
+
+        assertEquals(listOf<NotesEvent>(NotesEvent.CreateChecklist), events)
+    }
+
+    @Test
+    fun cardsShowContentProgressAndPinnedSection() {
+        setContent(NotesUiState(notes = listOf(shoppingList, ideaNote), hasAnyNotes = true, labels = labels))
+
+        composeRule.onNodeWithText("SUPERMARKT").assertIsDisplayed()
+        composeRule.onNodeWithText("Wocheneinkauf").assertIsDisplayed()
+        composeRule.onNodeWithText("Feta").assertIsDisplayed()
+        composeRule.onNodeWithText(context.getString(R.string.note_progress, 1, 4)).assertIsDisplayed()
+        composeRule.onNodeWithText(context.getString(R.string.notes_section_pinned).uppercase()).assertIsDisplayed()
+        composeRule.onNodeWithText(context.getString(R.string.notes_section_others).uppercase()).assertIsDisplayed()
+        composeRule.onNodeWithText("Fotobuch von Lissabon").assertIsDisplayed()
+    }
+
+    @Test
+    fun checkedItemsAreLeftOutOfTheCardPreview() {
+        setContent(NotesUiState(notes = listOf(shoppingList), hasAnyNotes = true))
+
+        composeRule.onNodeWithText("Hafermilch").assertDoesNotExist()
+    }
+
+    @Test
+    fun tappingACardOpensTheNote() {
+        setContent(NotesUiState(notes = listOf(ideaNote), hasAnyNotes = true))
+
+        composeRule.onNodeWithTag("note_card_idea").performClick()
+
+        assertEquals(listOf<NotesEvent>(NotesEvent.OpenNote("idea")), events)
+    }
+
+    @Test
+    fun filterChipsShowTheSpaceLabelsAndSelectOnlyOnChange() {
+        setContent(NotesUiState(notes = listOf(ideaNote), hasAnyNotes = true, labels = labels))
+
+        composeRule.onNodeWithText("Lissabon 2027").assertIsDisplayed()
+        composeRule.onNodeWithTag("notes_filter_ALL").performClick()
+        composeRule.onNodeWithTag("notes_filter_travel").performClick()
+
+        assertEquals(listOf<NotesEvent>(NotesEvent.FilterSelected("travel")), events)
+    }
+
+    @Test
+    fun editChipOpensTheLabelManager() {
+        setContent(NotesUiState(notes = listOf(ideaNote), hasAnyNotes = true, labels = labels))
+
+        composeRule.onNodeWithTag("manage_labels_chip").performClick()
+
+        assertEquals(listOf<NotesEvent>(NotesEvent.OpenLabelManager), events)
+    }
+
+    @Test
+    fun cardOfANoteWithADeletedLabelShowsNoLabel() {
+        setContent(NotesUiState(notes = listOf(shoppingList), hasAnyNotes = true, labels = labels.drop(1)))
+
+        composeRule.onNodeWithText("SUPERMARKT").assertDoesNotExist()
+        composeRule.onNodeWithText("Wocheneinkauf").assertIsDisplayed()
+    }
+
+    @Test
+    fun filterWithoutMatchesShowsAHint() {
+        setContent(NotesUiState(notes = emptyList(), hasAnyNotes = true, labelFilter = DefaultNoteLabelIds.BUCKET_LIST))
+
+        composeRule.onNodeWithTag("notes_filter_empty").assertIsDisplayed()
+        composeRule.onNodeWithTag("empty_notes_card").assertDoesNotExist()
+    }
+
+    @Test
+    fun openNoteShowsTheEditorInsteadOfTheOverview() {
+        setContent(NotesUiState(notes = listOf(ideaNote), hasAnyNotes = true, openNote = ideaNote))
+
+        composeRule.onNodeWithTag("note_editor").assertIsDisplayed()
+        composeRule.onNodeWithTag("notes_grid").assertDoesNotExist()
+        assertTrue(events.isEmpty())
+    }
+
+    @Test
+    fun scrollPositionIsPreservedWhenNoteIsOpenedAndClosed() {
+        val notes = (1..30).map { i ->
+            SharedNote(id = "note_$i", title = "Notiz $i", body = "Inhalt $i")
+        }
+        var state by mutableStateOf(NotesUiState(notes = notes, hasAnyNotes = true))
+        val gridState = LazyStaggeredGridState()
+        composeRule.setContent {
+            CoupleBubbleTheme(darkTheme = false) {
+                NotesScreen(
+                    state = state,
+                    onEvent = {},
+                    gridState = gridState
+                )
+            }
+        }
+
+        composeRule.runOnIdle {
+            kotlinx.coroutines.runBlocking {
+                gridState.scrollToItem(10)
+            }
+        }
+        composeRule.waitForIdle()
+        val initialScrolledIndex = gridState.firstVisibleItemIndex
+        assertTrue(initialScrolledIndex > 0)
+
+        // Open note
+        state = state.copy(openNote = notes.first())
+        composeRule.waitForIdle()
+        composeRule.onNodeWithTag("note_editor").assertIsDisplayed()
+
+        // Close note
+        state = state.copy(openNote = null)
+        composeRule.waitForIdle()
+        composeRule.onNodeWithTag("notes_grid").assertIsDisplayed()
+
+        assertEquals(initialScrolledIndex, gridState.firstVisibleItemIndex)
+    }
+
+    @Test
+    fun cardSummaryNamesAuthor() {
+        setContent(
+            NotesUiState(
+                notes = listOf(shoppingList),
+                hasAnyNotes = true,
+                authorColors = mapOf("uid_alex" to "#E65D2E"),
+                authorNames = mapOf("uid_alex" to "Alex")
+            )
+        )
+
+        composeRule.onNodeWithContentDescription("Erstellt von Alex", substring = true).assertIsDisplayed()
+    }
+
+    @Test
+    fun selectionBarDisplaysSelectedCountAndProvidesAllActions() {
+        setContent(
+            NotesUiState(
+                notes = listOf(shoppingList, ideaNote),
+                hasAnyNotes = true,
+                labels = labels,
+                selectedNoteIds = setOf("shopping")
+            )
+        )
+
+        composeRule.onNodeWithTag("notes_selection_bar").assertIsDisplayed()
+        composeRule.onNodeWithText("1 ausgewählt").assertIsDisplayed()
+
+        // "Alle auswählen"
+        composeRule.onNodeWithTag("notes_selection_select_all").performClick()
+        assertEquals(listOf<NotesEvent>(NotesEvent.SelectAll), events)
+
+        // "Anheften/Lösen"
+        composeRule.onNodeWithTag("notes_selection_pin").performClick()
+        assertEquals(listOf(NotesEvent.SelectAll, NotesEvent.TogglePinnedSelected), events)
+
+        // "Etikett ändern"
+        composeRule.onNodeWithTag("notes_selection_label").performClick()
+        composeRule.onNodeWithTag("notes_selection_label_travel").performClick()
+        assertEquals(
+            listOf(NotesEvent.SelectAll, NotesEvent.TogglePinnedSelected, NotesEvent.ChangeSelectedLabel("travel")),
+            events
+        )
+
+        // "Löschen"
+        composeRule.onNodeWithTag("notes_selection_delete").performClick()
+        assertEquals(
+            listOf(
+                NotesEvent.SelectAll,
+                NotesEvent.TogglePinnedSelected,
+                NotesEvent.ChangeSelectedLabel("travel"),
+                NotesEvent.DeleteSelected
+            ),
+            events
+        )
+
+        // "Auswahl beenden"
+        composeRule.onNodeWithTag("notes_selection_clear").performClick()
+        assertEquals(
+            listOf(
+                NotesEvent.SelectAll,
+                NotesEvent.TogglePinnedSelected,
+                NotesEvent.ChangeSelectedLabel("travel"),
+                NotesEvent.DeleteSelected,
+                NotesEvent.ClearSelection
+            ),
+            events
+        )
+    }
+
+    @Test
+    fun noteCardsInSelectionModeHaveSelectedSemanticsAndStateDescription() {
+        setContent(
+            NotesUiState(
+                notes = listOf(shoppingList, ideaNote),
+                hasAnyNotes = true,
+                labels = labels,
+                selectedNoteIds = setOf("shopping")
+            )
+        )
+
+        // shoppingList is selected
+        val shoppingCard = composeRule.onNodeWithTag("note_card_shopping")
+        shoppingCard.assertIsSelected()
+        shoppingCard.assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "Ausgewählt"))
+
+        // ideaNote is in selection mode but not selected
+        val ideaCard = composeRule.onNodeWithTag("note_card_idea")
+        ideaCard.assertIsNotSelected()
+        ideaCard.assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "Nicht ausgewählt"))
+    }
+
+    @Test
+    fun noteCardsHaveStartSelectionLongClickLabel() {
+        setContent(NotesUiState(notes = listOf(ideaNote), hasAnyNotes = true))
+
+        val ideaCard = composeRule.onNodeWithTag("note_card_idea")
+        ideaCard.assert(SemanticsMatcher.keyNotDefined(SemanticsProperties.Selected))
+        ideaCard.assert(
+            SemanticsMatcher("has onLongClickLabel Auswahl starten") { node ->
+                node.config.contains(SemanticsActions.OnLongClick) &&
+                    node.config[SemanticsActions.OnLongClick].label == "Auswahl starten"
+            }
+        )
+    }
+
+    @Test
+    fun searchIconOpensSearch() {
+        setContent(NotesUiState(notes = listOf(ideaNote), hasAnyNotes = true))
+
+        composeRule.onNodeWithTag("notes_search_icon").performClick()
+
+        assertEquals(listOf<NotesEvent>(NotesEvent.OpenSearch), events)
+    }
+
+    @Test
+    fun searchBarAllowsTypingAndClearingAndClosing() {
+        var state by mutableStateOf(
+            NotesUiState(
+                notes = listOf(ideaNote),
+                hasAnyNotes = true,
+                isSearchOpen = true,
+                searchQuery = ""
+            )
+        )
+        composeRule.setContent {
+            CoupleBubbleTheme(darkTheme = false) {
+                NotesScreen(
+                    state = state,
+                    onEvent = { event ->
+                        events += event
+                        if (event is NotesEvent.SearchQueryChanged) {
+                            state = state.copy(searchQuery = event.query)
+                        }
+                    }
+                )
+            }
+        }
+
+        composeRule.onNodeWithTag("notes_search_bar").assertIsDisplayed()
+        composeRule.onNodeWithTag("notes_search_input").performTextInput("kase")
+        assertEquals(listOf<NotesEvent>(NotesEvent.SearchQueryChanged("kase")), events)
+
+        composeRule.onNodeWithTag("notes_search_clear").performClick()
+        assertEquals(listOf(NotesEvent.SearchQueryChanged("kase"), NotesEvent.SearchQueryChanged("")), events)
+
+        composeRule.onNodeWithTag("notes_search_close").performClick()
+        assertEquals(
+            listOf(
+                NotesEvent.SearchQueryChanged("kase"),
+                NotesEvent.SearchQueryChanged(""),
+                NotesEvent.CloseSearch
+            ),
+            events
+        )
+    }
+
+    @Test
+    fun searchEmptyStateDisplaysQuery() {
+        setContent(
+            NotesUiState(
+                notes = emptyList(),
+                hasAnyNotes = true,
+                isSearchOpen = true,
+                searchQuery = "Zauber"
+            )
+        )
+
+        composeRule.onNodeWithTag("notes_search_empty").assertIsDisplayed()
+        composeRule.onNodeWithText("Nichts gefunden für „Zauber“").assertIsDisplayed()
+    }
+
+    @Test
+    fun labelFilterEmptyStateNamesLabelAndOffersShowAll() {
+        setContent(
+            NotesUiState(
+                notes = emptyList(),
+                hasAnyNotes = true,
+                labels = labels,
+                labelFilter = "travel"
+            )
+        )
+
+        composeRule.onNodeWithTag("notes_filter_empty").assertIsDisplayed()
+        composeRule.onNodeWithText("Keine Notizen mit dem Etikett „Lissabon 2027“").assertIsDisplayed()
+        composeRule.onNodeWithTag("notes_filter_show_all").assertIsDisplayed()
+
+        composeRule.onNodeWithTag("notes_filter_show_all").performClick()
+        assertEquals(listOf<NotesEvent>(NotesEvent.FilterSelected(null)), events)
+    }
+
+    @Test
+    fun backClosesSearchFirst() {
+        setContent(
+            NotesUiState(
+                notes = listOf(shoppingList),
+                hasAnyNotes = true,
+                isSearchOpen = true,
+                selectedNoteIds = setOf("shopping")
+            )
+        )
+
+        composeRule.runOnUiThread { composeRule.activity.onBackPressedDispatcher.onBackPressed() }
+
+        assertEquals(listOf<NotesEvent>(NotesEvent.CloseSearch), events)
+    }
+}

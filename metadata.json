@@ -1,0 +1,6 @@
+{
+  "name": "CoupleBubble",
+  "description": "Native couples app with a relationship counter, milestones and pairing code.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

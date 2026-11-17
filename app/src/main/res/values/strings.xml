@@ -1,0 +1,580 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">CoupleBubble</string>
+    <string name="tagline">Euer gemeinsamer Raum</string>
+    <string name="tab_create_code">Code erstellen</string>
+    <string name="tab_enter_code">Code eingeben</string>
+    <string name="create_code_desc">Teile diesen Code mit deiner Partnerin oder deinem Partner. Sobald beide verbunden sind, öffnet sich euer Raum.</string>
+    <string name="enter_code_demo_fill">Code „482-913“ einfügen</string>
+    <string name="pin_input_description">Kopplungscode, 6 Ziffern</string>
+    <string name="pin_input_progress">%1$d von 6 Ziffern eingegeben</string>
+    <string name="pin_input_progress_digits">%1$d von 6 Ziffern eingegeben: %2$s</string>
+    <string name="pairing_code_spoken">Dein Kopplungscode: %1$s</string>
+    <plurals name="code_valid_minutes">
+        <item quantity="one">Code noch höchstens %1$d Minute gültig</item>
+        <item quantity="other">Code noch höchstens %1$d Minuten gültig</item>
+    </plurals>
+    <string name="profile_photo_of">Profilbild von %1$s</string>
+    <string name="avatar_action_view">Profilbild ansehen</string>
+    <string name="avatar_action_options">Profilbild-Optionen öffnen</string>
+    <string name="avatar_action_pick">Profilbild auswählen</string>
+    <string name="paste_code_from_clipboard">Code aus Zwischenablage einfügen: %1$s</string>
+    <string name="enter_code_desc">Gib den 6-stelligen Kopplungscode ein, den du von deiner Partnerin oder deinem Partner erhalten hast.</string>
+    <string name="copy_code">Code kopieren</string>
+    <string name="code_copied">Code in die Zwischenablage kopiert</string>
+    <string name="connect">Verbinden</string>
+    <string name="space_full_title">Dieser Raum ist bereits belegt</string>
+    <string name="space_full_message">In CoupleBubble können maximal zwei Personen einen gemeinsamen Raum teilen. Bitte überprüfe den Code oder erstelle einen eigenen Raum.</string>
+    <string name="space_full_recheck_code">Code erneut prüfen</string>
+    <string name="space_full_create_own">Eigenen Raum erstellen</string>
+    <string name="connecting">Verbindung wird hergestellt…</string>
+    <string name="together_since_date">Zusammen seit %1$s</string>
+    <string name="counter_mode_days">Tage</string>
+    <string name="counter_mode_weeks">Wochen</string>
+    <string name="counter_mode_months">Monate</string>
+    <string name="counter_mode_years">Jahre</string>
+    <plurals name="counter_unit_days">
+        <item quantity="one">Tag</item>
+        <item quantity="other">Tage</item>
+    </plurals>
+    <plurals name="counter_unit_weeks">
+        <item quantity="one">Woche</item>
+        <item quantity="other">Wochen</item>
+    </plurals>
+    <plurals name="counter_unit_months">
+        <item quantity="one">Monat</item>
+        <item quantity="other">Monate</item>
+    </plurals>
+    <plurals name="counter_unit_years">
+        <item quantity="one">Jahr</item>
+        <item quantity="other">Jahre</item>
+    </plurals>
+    <plurals name="counter_and_days">
+        <item quantity="one">und %d Tag</item>
+        <item quantity="other">und %d Tage</item>
+    </plurals>
+    <plurals name="months_count">
+        <item quantity="one">%d Monat</item>
+        <item quantity="other">%d Monate</item>
+    </plurals>
+    <plurals name="days_count">
+        <item quantity="one">%d Tag</item>
+        <item quantity="other">%d Tage</item>
+    </plurals>
+    <string name="next_milestone">Nächster Meilenstein</string>
+    <plurals name="milestone_in_days">
+        <item quantity="one">in %d Tag</item>
+        <item quantity="other">in %d Tagen</item>
+    </plurals>
+    <string name="milestone_today">heute</string>
+    <plurals name="milestone_title_days">
+        <item quantity="one">%s Tag</item>
+        <item quantity="other">%s Tage</item>
+    </plurals>
+    <plurals name="milestone_title_weeks">
+        <item quantity="one">%s Woche</item>
+        <item quantity="other">%s Wochen</item>
+    </plurals>
+    <string name="milestone_title_monthiversary">%d. Monatstag</string>
+    <string name="milestone_title_anniversary">%d. Jahrestag</string>
+    <plurals name="milestone_title_moment">
+        <item quantity="one">%1$s · %2$d Jahr</item>
+        <item quantity="other">%1$s · %2$d Jahre</item>
+    </plurals>
+    <string name="milestone_settings_title">Meilensteine</string>
+    <string name="milestone_settings_desc">Wähle, an welche Meilensteine du erinnert werden möchtest.</string>
+    <string name="milestone_kind_days">Tage (100, 500, 1.000 …)</string>
+    <string name="milestone_kind_weeks">Wochen (10, 50, 100 …)</string>
+    <string name="milestone_kind_months">Monatstage</string>
+    <string name="milestone_kind_years">Jahrestage</string>
+    <string name="milestone_kind_custom">Eigene Meilensteine</string>
+    <string name="milestone_kind_moments">Momente</string>
+    <string name="milestone_moments_section">Momente (%d)</string>
+    <string name="milestone_moments_empty">Noch keine Momente festgehalten.</string>
+    <string name="milestone_moments_expand">Momente aufklappen</string>
+    <string name="milestone_moments_collapse">Momente zuklappen</string>
+    <string name="custom_milestones_empty">Noch keine eigenen Meilensteine. Hochzeit, erste Wohnung oder euer nächster Urlaub?</string>
+    <string name="add_custom_milestone">Eigenen Meilenstein hinzufügen</string>
+    <string name="custom_milestone_name_label">Name</string>
+    <string name="custom_milestone_name_placeholder">z. B. Hochzeit</string>
+    <string name="custom_milestone_yearly">jedes Jahr</string>
+    <string name="custom_milestone_recurring_label">Jedes Jahr feiern</string>
+    <string name="custom_milestone_recurring_hint">Kommt jedes Jahr am selben Tag wieder, z. B. euer Hochzeitstag.</string>
+    <string name="custom_milestone_disabled">ausgeschaltet</string>
+    <string name="custom_milestone_enabled_toggle">„%1$s“ mitzählen</string>
+    <string name="delete_custom_milestone">„%1$s“ löschen</string>
+    <string name="delete_custom_milestone_title">Meilenstein löschen?</string>
+    <string name="delete_custom_milestone_desc">„%1$s“ verschwindet für euch beide. Das lässt sich nicht rückgängig machen.</string>
+    <string name="widget_milestone_countdown">%1$s · %2$s</string>
+    <string name="widget_names">%1$s &amp; %2$s</string>
+    <string name="widget_not_paired">Öffne CoupleBubble und verbinde dich mit deinem Menschen.</string>
+    <string name="widget_milestone_name">Nächster Meilenstein</string>
+    <string name="widget_milestone_description">Zählt die Tage bis zu eurem nächsten Meilenstein.</string>
+    <string name="widget_milestone_today">Heute</string>
+    <string name="widget_milestone_today_label">ist euer Tag</string>
+    <string name="widget_not_paired_short">Noch nicht verbunden</string>
+    <string name="widget_milestone_none_short">Kein Meilenstein</string>
+    <string name="widget_milestone_progress">%1$d %% des Wegs bis %2$s geschafft</string>
+    <string name="widget_reunion_progress">%1$d %% der Wartezeit geschafft</string>
+    <string name="widget_reunion_none_short">Nichts geplant</string>
+    <string name="widget_reunion_row_until">%1$s bis wir uns sehen</string>
+    <string name="widget_milestone_row">%1$s bis %2$s</string>
+    <string name="widget_together_unit">%1$s zusammen</string>
+    <plurals name="widget_days_short">
+        <item quantity="one">Tag</item>
+        <item quantity="other">Tage</item>
+    </plurals>
+    <string name="widget_reunion_of_total_short">von %1$d</string>
+    <string name="widget_reunion_name">Wiedersehen</string>
+    <string name="widget_reunion_description">Zählt die Tage, bis ihr euch wiederseht, und zeigt, wie weit ihr gerade voneinander entfernt seid.</string>
+    <string name="widget_reunion_heading">Wiedersehen</string>
+    <string name="widget_reunion_none">Noch kein Wiedersehen geplant. Trag in der App ein, wann ihr euch seht.</string>
+    <string name="widget_reunion_distance">≈ %1$s km zwischen euch</string>
+    <string name="widget_milestone_none">Gerade steht kein Meilenstein an. Leg in der App einen eigenen an.</string>
+    <plurals name="widget_milestone_days_left">
+        <item quantity="one">Tag bis dahin</item>
+        <item quantity="other">Tage bis dahin</item>
+    </plurals>
+    <string name="settings">Einstellungen</string>
+    <string name="more_options">Weitere Optionen</string>
+    <string name="disconnect_option">Verbindung trennen</string>
+    <string name="disconnect_dialog_title">Verbindung trennen?</string>
+    <string name="disconnect_dialog_desc">Dein Partner wird ebenfalls getrennt und gelangt zurück zur Kopplung. Eure gemeinsamen Momente, Notizen und Fotos bleiben gespeichert, sind aber für euch beide erst nach einer erneuten Verbindung wieder sichtbar.</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="confirm_disconnect">Trennen</string>
+
+    <!-- Spitznamen & Profil -->
+    <string name="edit_names">Spitznamen bearbeiten</string>
+    <string name="partner_a_label">Partner 1</string>
+    <string name="partner_b_label">Partner 2</string>
+    <string name="save">Speichern</string>
+    <string name="date_picker_apply">Übernehmen</string>
+    <string name="date_field_description">%1$s: %2$s</string>
+    <string name="date_field_action">Datum wählen</string>
+    <string name="swap_partners_tooltip">Rollen tauschen (Partner 1 &amp; 2)</string>
+    <string name="swap_partners_success">Partner-Rollen wurden getauscht</string>
+    <string name="swap_partners_failed">Die Rollen konnten gerade nicht getauscht werden. Prüf kurz deine Verbindung und versuch es nochmal.</string>
+    <string name="swap_partners_wait_for_upload">Ein Foto wird gerade noch hochgeladen. Tausch die Rollen gleich nochmal.</string>
+    <string name="swap_partners_partner_missing">Tauschen geht erst, wenn dein Partner mit eurem Raum verbunden ist.</string>
+    <string name="choose_accent_color">Akzentfarbe wählen</string>
+    <string name="color_terracotta">Terracotta</string>
+    <string name="color_sage">Salbei</string>
+    <string name="color_rose">Rosé</string>
+    <string name="color_ocean">Ozeanblau</string>
+    <string name="color_amber">Bernstein</string>
+    <string name="color_berry">Beere</string>
+    <string name="color_mint">Mint</string>
+    <string name="color_coral">Koralle</string>
+
+    <!-- Memories & Chronik -->
+    <string name="add_memory">Moment festhalten</string>
+    <string name="add_memory_dialog_title">Neuen Moment hinzufügen</string>
+    <string name="edit_memory_dialog_title">Moment bearbeiten</string>
+    <string name="memory_title_label">Titel</string>
+    <string name="memory_title_placeholder">z. B. Erster Urlaub am Meer</string>
+    <string name="memory_date_label">Datum</string>
+    <string name="memory_note_label">Persönliche Notiz</string>
+    <string name="memory_note_placeholder">Was hat diesen Augenblick unvergesslich gemacht?</string>
+    <string name="memory_counts_as_milestone">Jedes Jahr als Meilenstein feiern</string>
+    <string name="save_memory">Moment speichern</string>
+    <string name="add_first_memory">Ersten Moment eintragen</string>
+    <string name="edit_memory">Moment bearbeiten</string>
+    <string name="delete_memory">Moment löschen</string>
+    <string name="confirm_delete">Löschen</string>
+    <string name="photo_of_partner">Foto von %1$s</string>
+    <string name="photo_sync_uploading">Foto wird hochgeladen</string>
+    <string name="photo_sync_done">Foto ist synchronisiert</string>
+    <string name="photo_slot_locked">Nur %1$s kann dieses Foto ändern</string>
+    <string name="photo_of_partner_readonly">Foto von %1$s (schreibgeschützt)</string>
+    <string name="select_photo_for_partner">Foto von %1$s auswählen</string>
+    <string name="photo_selected_for_partner">Foto von %1$s ausgewählt</string>
+    <string name="remove_photo">Foto entfernen</string>
+    <string name="add_partner_photo_prompt">Foto von %1$s ergänzen</string>
+    <string name="save_to_gallery">In Galerie speichern</string>
+    <string name="photo_saved_to_gallery">Foto in Galerie gespeichert</string>
+    <string name="photos_saved_to_gallery">Alle Fotos in Galerie gespeichert</string>
+    <string name="photo_save_failed">Fehler beim Speichern des Fotos</string>
+    <string name="fullscreen_view">Vollbildansicht</string>
+    <string name="close">Schließen</string>
+
+    <!-- Widget -->
+    <string name="widget_name">CoupleBubble Status</string>
+
+    <!-- Room Setup & Onboarding Dialog -->
+    <string name="setup_space_title">Euren Raum einrichten</string>
+    <string name="setup_space_subtitle">Ihr seid verbunden. Wie sollen wir euch nennen, und seit wann seid ihr zusammen?</string>
+    <string name="setup_space_pick_date">Datum wählen</string>
+    <string name="setup_space_date_hint">Euer Zähler und eure Meilensteine starten an diesem Tag. Ihr könnt beide den Raum einrichten, es reicht, wenn einer von euch speichert.</string>
+    <string name="partner_a_nickname">Dein Spitzname</string>
+    <string name="partner_b_nickname">Spitzname deines Schatzes</string>
+    <string name="input_error_empty">Bitte trag hier etwas ein</string>
+    <plurals name="input_error_too_short">
+        <item quantity="one">Mindestens %d Zeichen, bitte</item>
+        <item quantity="other">Mindestens %d Zeichen, bitte</item>
+    </plurals>
+    <plurals name="input_error_too_long">
+        <item quantity="one">Höchstens %d Zeichen – kürz es ein wenig</item>
+        <item quantity="other">Höchstens %d Zeichen – kürz es ein wenig</item>
+    </plurals>
+    <string name="input_counter">%1$d/%2$d</string>
+    <string name="anniversary_date_label">Datum des Zusammenkommens</string>
+    <string name="save_space_setup">Raum erstellen</string>
+
+    <!-- Google Auth & Backup Anchor -->
+    <string name="google_backup_title">Google-Datensicherung</string>
+    <string name="google_sign_in_btn">Mit Google anmelden</string>
+    <string name="google_signed_in_as">Angemeldet mit Google-Konto</string>
+    <string name="google_sign_out">Von Google abmelden</string>
+    <string name="google_backup_optional">Optional: Für automatische Datensicherung bei App-Updates</string>
+    <string name="google_sign_in_loading">Anmeldung läuft…</string>
+    <string name="google_sign_in_failed">Anmeldung fehlgeschlagen. Bitte prüfe deine Internetverbindung und Google Play Dienste.</string>
+    <string name="google_sign_in_unavailable">Die Google-Anmeldung klappt gerade nicht. Versuch es später nochmal – du kannst den Raum auch ohne Google nutzen.</string>
+    <string name="google_sign_in_demo_unavailable">Im Demo-Modus gibt es keine Google-Anmeldung. Alles andere kannst du ganz normal ausprobieren.</string>
+    <string name="google_sign_in_error_prefix">Google-Anmeldung fehlgeschlagen: %1$s</string>
+    <string name="google_icon_content_description">Google Konto</string>
+    <string name="google_error_sha1_missing">Die Google-Anmeldung ist für diese App-Version noch nicht freigeschaltet: Der SHA-1-Fingerprint der App-Signatur (Debug bzw. Play App Signing) fehlt in Firebase.</string>
+    <string name="google_error_provider_disabled">Google Sign-In ist in der Firebase Console unter Authentication noch nicht aktiviert.</string>
+    <string name="google_error_no_credentials">Kein passendes Google-Konto ausgewählt oder auf dem Gerät angemeldet.</string>
+    <string name="google_error_network">Keine Verbindung zu Google. Prüf kurz dein Internet und versuch es gleich nochmal.</string>
+
+    <!-- Profile Photo & Crop -->
+    <string name="crop_photo_title">Bildausschnitt anpassen</string>
+    <string name="crop_photo_confirm">Übernehmen</string>
+    <string name="crop_photo_instruction">Verschiebe und zoome das Bild, um den Ausschnitt festzulegen.</string>
+    <string name="only_own_avatar_editable">Du kannst nur dein eigenes Profilbild bearbeiten</string>
+    <string name="profile_photo_view">Im Vollbild ansehen</string>
+    <string name="profile_photo_change">Foto ändern</string>
+    <string name="profile_photo_saved">Profilbild aktualisiert</string>
+    <string name="profile_photo_slot_unknown">Dein Profil wird gerade noch mit eurem Raum verbunden. Versuch es gleich nochmal.</string>
+    <string name="profile_photo_wait_for_swap">Eure Rollen werden gerade getauscht. Ändere dein Profilbild gleich danach.</string>
+    <string name="profile_photo_upload_failed">Profilbild lokal gespeichert (Cloud-Sync verzögert)</string>
+
+    <!-- Custom Color Picker -->
+    <string name="custom_color_title">Akzentfarbe anpassen</string>
+    <string name="custom_color_button">Eigene Farbe wählen</string>
+    <string name="custom_color_hex">Hex-Farbcode</string>
+    <string name="custom_color_invalid_hex">Ungültiger Hex-Code (z. B. #E65D2E)</string>
+    <string name="custom_color_apply">Farbe anwenden</string>
+    <string name="custom_color_hue">Farbton</string>
+    <string name="custom_color_saturation">Sättigung</string>
+    <string name="custom_color_value">Helligkeit</string>
+    <string name="custom_color_preset">Kuratiert</string>
+
+    <!-- Bottom Navigation -->
+    <string name="nav_tab_us">Uns</string>
+    <string name="nav_tab_notes">Notizen</string>
+
+    <!-- Shared Notes & Lists -->
+    <string name="notes_title">Notizen</string>
+    <string name="notes_search_hint">Notizen durchsuchen</string>
+    <string name="notes_search_placeholder">In Notizen suchen…</string>
+    <string name="notes_search_close">Suche schließen</string>
+    <string name="notes_search_clear">Eingabe löschen</string>
+    <string name="notes_search_empty">Nichts gefunden für „%1$s“</string>
+    <string name="notes_filter_label_empty">Keine Notizen mit dem Etikett „%1$s“</string>
+    <string name="notes_filter_show_all">Alle anzeigen</string>
+    <string name="notes_filter_all">Alle</string>
+    <!-- Labels every space starts with; afterwards both partners can rename or delete them -->
+    <string name="note_label_default_shopping">Einkauf</string>
+    <string name="note_label_default_bucket_list">Bucket List</string>
+    <string name="note_label_default_ideas">Ideen</string>
+    <string name="note_label_none">Ohne Etikett</string>
+    <string name="notes_section_pinned">Angeheftet</string>
+    <string name="notes_section_others">Weitere</string>
+    <string name="add_note">Notiz anlegen</string>
+    <string name="add_checklist">Neue Liste</string>
+    <string name="add_first_note">Erste Notiz anlegen</string>
+    <string name="notes_filter_empty">Hier steht noch nichts. Leg einfach los.</string>
+    <string name="note_untitled">Ohne Titel</string>
+    <!-- "von … erledigt" reads the same for any count in German -->
+    <string name="note_progress" tools:ignore="PluralsCandidate">%1$d von %2$d erledigt</string>
+    <plurals name="note_more_items">
+        <item quantity="one">+ 1 weiterer Punkt</item>
+        <item quantity="other">+ %d weitere Punkte</item>
+    </plurals>
+    <string name="note_pinned">Angeheftet</string>
+    <string name="note_unread_changes">Neue Änderungen</string>
+    <string name="note_back">Zurück zur Übersicht</string>
+    <string name="note_pin">Anheften</string>
+    <string name="note_unpin">Nicht mehr anheften</string>
+    <string name="note_choose_label">Etikett wählen</string>
+    <string name="note_convert_to_checklist">In Liste umwandeln</string>
+    <string name="note_convert_to_text">In Text umwandeln</string>
+    <string name="note_more_options">Weitere Optionen</string>
+    <string name="note_delete">Notiz löschen</string>
+    <string name="note_title_placeholder">Titel</string>
+    <string name="note_body_placeholder">Schreib etwas auf…</string>
+    <string name="note_item_placeholder">Listenpunkt</string>
+    <string name="note_add_item_placeholder">Punkt hinzufügen</string>
+    <string name="note_checked_section">Erledigt (%1$d)</string>
+    <string name="note_clear_checked">Erledigte entfernen</string>
+    <string name="note_delete_item">Punkt entfernen</string>
+    <string name="note_item_move_up">Nach oben verschieben</string>
+    <string name="note_item_move_down">Nach unten verschieben</string>
+    <string name="note_item_delete_action">Löschen</string>
+    <string name="note_card_label">Etikett %1$s</string>
+    <string name="note_selected">Ausgewählt</string>
+    <string name="note_not_selected">Nicht ausgewählt</string>
+    <string name="note_start_selection">Auswahl starten</string>
+    <string name="notes_selection_clear">Auswahl beenden</string>
+    <string name="notes_selection_select_all">Alle auswählen</string>
+    <string name="notes_selection_pin">Anheften</string>
+    <string name="notes_selection_unpin">Lösen</string>
+    <string name="notes_selection_change_label">Etikett ändern</string>
+    <string name="notes_selection_delete">Ausgewählte Notizen löschen</string>
+    <plurals name="notes_selected_count">
+        <item quantity="one">%d ausgewählt</item>
+        <item quantity="other">%d ausgewählt</item>
+    </plurals>
+    <plurals name="notes_deleted">
+        <item quantity="one">Notiz gelöscht</item>
+        <item quantity="other">%d Notizen gelöscht</item>
+    </plurals>
+    <plurals name="note_items_deleted">
+        <item quantity="one">Punkt entfernt</item>
+        <item quantity="other">%d Punkte entfernt</item>
+    </plurals>
+    <string name="note_create_failed">Die Notiz konnte nicht angelegt werden. Prüf deine Verbindung und versuch es nochmal.</string>
+    <string name="note_save_failed">Deine Änderung an der Notiz wurde nicht gespeichert. Prüf deine Verbindung und versuch es nochmal.</string>
+    <string name="note_delete_failed">Das Löschen hat nicht geklappt, deine Notizen sind wieder da. Prüf deine Verbindung und versuch es nochmal.</string>
+    <string name="note_labels_save_failed">Deine Etiketten wurden nicht gespeichert. Prüf deine Verbindung und versuch es nochmal.</string>
+    <string name="note_empty_discarded">Leere Notiz verworfen</string>
+    <string name="note_delete_undo">Rückgängig</string>
+    <string name="note_last_edited">Zuletzt bearbeitet von %1$s · %2$s</string>
+    <string name="note_deleted_by_partner">%1$s hat diese Notiz gelöscht</string>
+    <string name="note_created_by">Erstellt von %1$s</string>
+    <string name="relative_time_just_now">gerade eben</string>
+    <plurals name="relative_time_minutes">
+        <item quantity="one">vor %d Min.</item>
+        <item quantity="other">vor %d Min.</item>
+    </plurals>
+    <plurals name="relative_time_hours">
+        <item quantity="one">vor %d Std.</item>
+        <item quantity="other">vor %d Std.</item>
+    </plurals>
+    <string name="relative_time_yesterday">gestern</string>
+    <plurals name="relative_time_days">
+        <item quantity="one">vor %d Tag</item>
+        <item quantity="other">vor %d Tagen</item>
+    </plurals>
+    <string name="relative_time_date">%1$s</string>
+
+    <!-- Label Management -->
+    <string name="manage_labels_chip">Bearbeiten</string>
+    <string name="manage_labels_menu">Etiketten bearbeiten</string>
+    <string name="manage_labels_title">Eure Etiketten</string>
+    <string name="manage_labels_hint">Benennt sie, wie es zu euch passt. Gespeichert wird erst mit „Fertig“; gelöschte Etiketten verschwinden nur von den Notizen.</string>
+    <string name="manage_labels_empty">Noch keine Etiketten. Leg unten das erste an.</string>
+    <string name="manage_labels_done">Fertig</string>
+    <string name="new_label_placeholder">Neues Etikett</string>
+    <string name="add_label">Etikett hinzufügen</string>
+    <string name="delete_label">Etikett „%1$s“ löschen</string>
+    <string name="label_name_taken">Dieses Etikett gibt es schon</string>
+    <string name="label_name_empty">Gib dem Etikett einen Namen</string>
+    <string name="restore_label">Etikett „%1$s“ wiederherstellen</string>
+    <string name="label_pending_delete">Wird mit „Fertig“ entfernt</string>
+    <plurals name="label_pending_delete_usage">
+        <item quantity="one">Wird mit „Fertig“ entfernt · 1 Notiz verliert das Etikett</item>
+        <item quantity="other">Wird mit „Fertig“ entfernt · %d Notizen verlieren das Etikett</item>
+    </plurals>
+    <string name="label_new_hint">Neu · wird mit „Fertig“ gespeichert</string>
+    <string name="discard_changes_title">Änderungen verwerfen?</string>
+    <string name="discard_changes_text">Deine Eingaben sind noch nicht gespeichert.</string>
+    <string name="discard_label_changes_text">Deine Änderungen an den Etiketten sind noch nicht gespeichert.</string>
+    <string name="discard_changes">Verwerfen</string>
+    <string name="keep_editing">Weiter bearbeiten</string>
+    <plurals name="label_usage">
+        <item quantity="one">In 1 Notiz</item>
+        <item quantity="other">In %d Notizen</item>
+    </plurals>
+
+    <!-- Pairing -->
+    <string name="pairing_code_incomplete">Bitte gib alle 6 Stellen deines Codes ein.</string>
+    <string name="pairing_code_invalid">Der Code muss aus genau 6 Ziffern bestehen (z. B. 482-913). Frag deinen Schatz am besten nochmal danach.</string>
+    <string name="pairing_connection_failed">Das Verbinden hat nicht geklappt. Prüf deine Internetverbindung, schau, ob der Code noch stimmt, und tipp dann nochmal auf „Verbinden“.</string>
+    <string name="space_unavailable">Gerade keine Verbindung zum Server. Prüf dein WLAN oder deine mobilen Daten und versuch es in einem Moment nochmal.</string>
+    <string name="your_pairing_code_label">DEIN KOPPLUNGSCODE</string>
+    <string name="open_demo_space">Oder Demo-Raum direkt öffnen</string>
+    <string name="code_valid_for">Gültig für %1$s</string>
+    <string name="renew_code">Code erneuern</string>
+
+    <!-- Dashboard feedback -->
+    <string name="saved_offline">Gespeichert – wird synchronisiert, sobald du online bist</string>
+    <string name="offline_banner">Offline – deine Änderungen werden synchronisiert, sobald du wieder online bist</string>
+    <string name="names_and_colors_updated">Spitznamen und Farben wurden aktualisiert</string>
+    <string name="memory_added">Neuer Moment festgehalten!</string>
+    <string name="memory_photo_slot_unknown">Dein Konto ist noch nicht mit eurem Raum verbunden, darum wurde dein Foto nicht gespeichert. Versuch es gleich nochmal.</string>
+    <string name="memory_save_failed">Der Moment wurde nicht gespeichert. Prüf deine Verbindung und versuch es nochmal.</string>
+    <string name="names_save_failed">Eure Namen und Farben wurden nicht gespeichert. Prüf deine Verbindung und versuch es nochmal.</string>
+    <string name="space_setup_save_failed">Euer Raum konnte nicht eingerichtet werden. Prüf deine Verbindung und versuch es nochmal.</string>
+    <string name="milestone_save_failed">Das hat nicht geklappt. Prüf deine Verbindung und versuch es nochmal.</string>
+    <string name="milestone_delete_failed">Der Meilenstein ließ sich nicht löschen. Prüf deine Verbindung und versuch es nochmal.</string>
+    <string name="memory_updated">Moment aktualisiert</string>
+    <string name="memory_deleted">Moment gelöscht</string>
+    <string name="memory_delete_undo">Rückgängig</string>
+    <string name="memory_delete_failed">Der Moment ließ sich nicht löschen und ist wieder da. Versuch es gleich noch mal.</string>
+    <string name="state_expanded">ausgeklappt</string>
+    <string name="state_collapsed">eingeklappt</string>
+    <string name="partner_fallback_name">Partner</string>
+    <plurals name="memory_count">
+        <item quantity="one">%d Moment</item>
+        <item quantity="other">%d Momente</item>
+    </plurals>
+    <!-- Memories search -->
+    <string name="memories_search_hint">Momente durchsuchen</string>
+    <string name="memories_search_placeholder">In Momenten suchen…</string>
+    <string name="memories_search_close">Suche schließen</string>
+    <string name="memories_search_clear">Eingabe löschen</string>
+    <string name="memories_search_empty">Keine Momente für „%1$s“ gefunden</string>
+    <string name="memories_search_empty_no_query">Keine Momente vorhanden</string>
+    <plurals name="memory_search_results_count">
+        <item quantity="one">%d Moment gefunden</item>
+        <item quantity="other">%d Momente gefunden</item>
+    </plurals>
+    <string name="timeline_jump_to_year" tools:ignore="PluralsCandidate">Zu Jahr %1$d springen</string>
+    <string name="invite_partner_label">NOCH ALLEIN HIER</string>
+    <string name="invite_partner_desc">Schick deinem Schatz diesen Code. Sobald er eingegeben ist, seid ihr beide in eurem Raum.</string>
+    <string name="share_code">Teilen</string>
+    <string name="share_room_code">Raum-Code teilen</string>
+    <string name="share_code_chooser">Code teilen über</string>
+    <string name="share_code_message">Komm in unseren CoupleBubble-Raum! Öffne die App, tippe auf „Code eingeben“ und gib %1$s ein.</string>
+    <string name="notification_channel_moments">Neue Momente</string>
+    <string name="notification_channel_moments_description">Wenn dein Partner einen Moment eingetragen hat</string>
+    <string name="notification_new_moment_title">%1$s hat einen neuen Moment eingetragen</string>
+    <string name="notification_new_moment_untitled">Schau gleich mal rein</string>
+    <string name="notification_channel_milestones">Meilensteine</string>
+    <string name="notification_channel_milestones_description">Wenn ihr heute einen Meilenstein erreicht</string>
+    <string name="notification_milestone_title">Heute: %1$s</string>
+    <string name="notification_milestone_text">Nehmt euch heute einen Moment füreinander.</string>
+    <string name="crop_photo_reset">Ausschnitt zurücksetzen</string>
+    <string name="crop_photo_zoom">Zoom</string>
+    <string name="memory_photo_unreadable">Das Foto konnte nicht gelesen werden – dein Moment wird ohne Foto gespeichert.</string>
+    <string name="memory_options">Moment-Optionen</string>
+    <string name="pairing_code_clip_label">CoupleBubble-Code</string>
+
+    <!-- Reunion countdown -->
+    <string name="reunion_menu">Wiedersehen planen</string>
+    <string name="reunion_dialog_title">Wann seht ihr euch?</string>
+    <string name="reunion_from">Von</string>
+    <string name="reunion_to">Bis</string>
+    <string name="reunion_distance_label">Entfernung</string>
+    <string name="reunion_share_location">Meinen ungefähren Standort nutzen</string>
+    <string name="reunion_share_location_hint">%1$s sieht nur die Entfernung, nie deinen Ort.</string>
+    <string name="reunion_location_denied">Kein Zugriff. Du kannst ihn in den Einstellungen erlauben.</string>
+    <string name="reunion_partner_shares">teilt den ungefähren Standort</string>
+    <string name="reunion_partner_nothing">noch keine Angabe</string>
+    <string name="reunion_remove">Wiedersehen entfernen</string>
+    <string name="reunion_remove_confirm_title">Wiedersehen entfernen?</string>
+    <string name="reunion_remove_confirm_text">Die Termine verschwinden für euch beide, und auch die geteilten Orte von dir und %1$s werden entfernt.</string>
+    <string name="reunion_remove_confirm">Entfernen</string>
+    <string name="reunion_until_label">Bis wir uns sehen</string>
+    <string name="reunion_today_label">Heute ist es so weit</string>
+    <string name="reunion_together_label">Ihr seid zusammen</string>
+    <plurals name="reunion_days_until_unit">
+        <item quantity="one">Tag</item>
+        <item quantity="other">Tage</item>
+    </plurals>
+    <string name="reunion_range">%1$s · %2$s bis %3$s</string>
+    <string name="reunion_day_of">Tag %1$d</string>
+    <plurals name="reunion_day_of_total">
+        <item quantity="one">von %d Tag</item>
+        <item quantity="other">von %d Tagen</item>
+    </plurals>
+    <string name="reunion_until_end">bis %1$s</string>
+    <string name="reunion_capture_moment">Moment festhalten</string>
+    <string name="reunion_distance">≈ %1$s km voneinander entfernt</string>
+    <string name="reunion_distance_together">Ihr seid gerade am selben Ort</string>
+    <string name="reunion_distance_missing">Tippe hier, um eure Entfernung zu ergänzen.</string>
+    <string name="reunion_you">Du</string>
+    <string name="reunion_source_location_now">Standort, gerade eben</string>
+    <plurals name="reunion_source_location_hours">
+        <item quantity="one">Standort, vor %d Std.</item>
+        <item quantity="other">Standort, vor %d Std.</item>
+    </plurals>
+    <plurals name="reunion_source_location_days">
+        <item quantity="one">Standort, vor %d Tag</item>
+        <item quantity="other">Standort, vor %d Tagen</item>
+    </plurals>
+    <string name="reunion_source_none">keine Angabe</string>
+    <string name="reunion_location_unavailable">Dein Standort war gerade nicht verfügbar. Beim nächsten Öffnen versuchen wir es noch einmal.</string>
+    <string name="reunion_end_in_past">Dieses Wiedersehen ist schon vorbei. Wähl ein Ende ab heute.</string>
+    <string name="reunion_end_before_start">Das Ende liegt vor dem Anfang.</string>
+    <string name="reunion_save_failed">Euer Wiedersehen konnte nicht gespeichert werden. Versuch es gleich noch einmal.</string>
+    <string name="reunion_place_save_failed">Dein Standort für das Wiedersehen wurde nicht gespeichert. Prüf deine Verbindung und versuch es nochmal.</string>
+    <string name="reunion_delete_failed">Das Wiedersehen konnte nicht entfernt werden. Versuch es gleich noch einmal.</string>
+    <string name="session_access_lost">Deine Anmeldung auf diesem Gerät ist verloren gegangen. Melde dich mit Google an, um euren Raum zurückzuholen, oder verbindet euch neu.</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_skip">Überspringen</string>
+    <string name="onboarding_next">Weiter</string>
+    <string name="onboarding_start">Los geht\'s</string>
+    <string name="onboarding_page_indicator">Seite %1$d von %2$d</string>
+
+    <string name="onboarding_step_1">01 · Euer Raum</string>
+    <string name="onboarding_title_1">Ein privater Raum nur für euch zwei</string>
+    <string name="onboarding_desc_1">CoupleBubble begleitet eure gemeinsame Zeit: Zählt eure Tage und Meilensteine, haltet besondere Momente mit Fotos fest, teilt Notizen und zählt die Tage bis zum nächsten Wiedersehen.</string>
+    <string name="onboarding_feature_time">Gemeinsame Zeit &amp; Meilensteine</string>
+    <string name="onboarding_feature_moments">Momente mit Fotos festhalten</string>
+    <string name="onboarding_feature_notes">Geteilte Notizen &amp; Listen</string>
+    <string name="onboarding_feature_reunion">Countdown bis zum Wiedersehen</string>
+
+    <string name="onboarding_step_2">02 · Verbinden</string>
+    <string name="onboarding_title_2">Mit 6 Ziffern verbunden</string>
+    <string name="onboarding_desc_2">Eine oder einer von euch erstellt einen 6-stelligen Code, die andere Person gibt ihn ein. Schon öffnet sich euer Raum – ganz ohne langes Einrichten.</string>
+    <string name="onboarding_code_demo_1">482</string>
+    <string name="onboarding_code_demo_2">913</string>
+    <string name="onboarding_connect_hint">Kein Passwort nötig – euer Code verbindet euch direkt miteinander.</string>
+
+    <string name="onboarding_step_3">03 · Privatsphäre</string>
+    <string name="onboarding_title_3">Nur zwischen euch beiden</string>
+    <string name="onboarding_desc_3">Eure Fotos, Notizen und Erinnerungen gehören allein euch. Niemand sonst hat Zugriff auf euren Raum, und nichts wird öffentlich geteilt.</string>
+    <string name="onboarding_privacy_card_title">100 % privat für euch zwei</string>
+    <string name="onboarding_privacy_card_desc">Kein öffentlicher Feed, keine Werbung, keine fremden Blicke. Was ihr teilt, bleibt in eurer Bubble.</string>
+
+    <!-- Gesture hints -->
+    <string name="hint_note_long_press">Halte eine Notiz gedrückt, um mehrere auszuwählen</string>
+    <string name="hint_fullscreen_swipe">Wische nach unten, um das Foto zu schließen</string>
+    <string name="hint_milestone_tap">Tippe auf den Meilenstein, um alle Meilensteine zu öffnen</string>
+    <string name="hint_checklist_drag">Ziehe am Griff, um Einträge zu sortieren</string>
+    <string name="hint_dismiss">Hinweis schließen</string>
+
+    <!-- Settings Screen -->
+    <string name="back">Zurück</string>
+    <string name="settings_section_space">Raum</string>
+    <string name="settings_section_appearance">Darstellung</string>
+    <string name="settings_section_notifications">Benachrichtigungen</string>
+    <string name="settings_section_account">Konto</string>
+    <string name="settings_section_about">Über</string>
+    <string name="settings_item_names_colors">Spitznamen &amp; Farben</string>
+    <string name="settings_item_share_code">Raum-Code teilen</string>
+    <string name="settings_item_milestones">Meilensteine</string>
+    <string name="settings_item_disconnect">Verbindung trennen</string>
+    <string name="settings_item_notify_moments">Neue Momente</string>
+    <string name="settings_item_notify_milestones">Meilensteine</string>
+    <string name="settings_item_system_notifications">System-Einstellungen</string>
+    <string name="notification_permission_warning_title">Benachrichtigungen deaktiviert</string>
+    <string name="notification_permission_warning_desc">Aktiviere Benachrichtigungen, um bei neuen Momenten und Meilensteinen informiert zu werden.</string>
+    <string name="notification_permission_allow">Erlauben</string>
+    <string name="theme_mode_system">System</string>
+    <string name="theme_mode_light">Hell</string>
+    <string name="theme_mode_dark">Dunkel</string>
+    <string name="settings_item_google_backup">Google-Sicherung</string>
+    <string name="settings_item_app_version">Version</string>
+    <string name="settings_item_privacy">Datenschutz</string>
+    <string name="privacy_summary_title">Datenschutz bei CoupleBubble</string>
+    <string name="privacy_summary_point_private">100 % privat für euch zwei: Eure Daten dienen ausschließlich dazu, CoupleBubble für dich und deinen Herzensmenschen bereitzustellen. Es gibt keinen öffentlichen Feed, keine Werbung und keinerlei Tracking- oder Werbedienste von Drittanbietern.</string>
+    <string name="privacy_summary_point_storage">Sichere Cloud-Speicherung: Eure gemeinsamen Momente, Notizen, Meilensteine und Fotos werden verschlüsselt per TLS/HTTPS in Google Firebase gespeichert. Ausschließlich ihr zwei habt über eure Konten Zugriff auf euren gemeinsamen Raum.</string>
+    <string name="privacy_summary_point_location">Standort nur optional: Der Wiedersehens-Countdown nutzt deinen ungefähren Standort (auf 10 km gerundet) nur dann, wenn du die Freigabe aktiv einschaltest. Exakte GPS-Daten oder Hintergrund-Tracking werden zu keinem Zeitpunkt erfasst.</string>
+    <string name="privacy_summary_point_rights">Volle Kontrolle &amp; Löschung: Du kannst jederzeit Auskunft über deine gespeicherten Daten verlangen oder die vollständige, unwiderrufliche Löschung deines Kontos und aller Beziehungsdaten anfordern (per E-Mail mit dem Betreff „Data deletion CoupleBubble“).</string>
+
+    <!-- App Shortcuts -->
+    <string name="shortcut_new_moment">Neuer Moment</string>
+    <string name="shortcut_new_note">Neue Notiz</string>
+    <string name="shortcut_new_list">Neue Liste</string>
+
+    <!-- Teilen aus anderen Apps -->
+    <string name="notification_summary_moments">Neue Momente von deinem Partner</string>
+    <string name="notification_summary_milestones">Ein Meilenstein ist erreicht</string>
+    <string name="share_requires_space">Du brauchst zuerst einen gemeinsamen Raum, um Inhalte zu teilen.</string>
+    <string name="dashboard_progress_milestone">%1$d %% des Wegs zum nächsten Meilenstein geschafft</string>
+    <string name="dashboard_progress_reunion">%1$d %% der Wartezeit geschafft</string>
+</resources>
